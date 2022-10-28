@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentAdminPortal.API", "StudentAdminPortal.API\StudentAdminPortal.API.csproj", "{FDF675CB-F3D6-475E-850F-162793659988}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF675CB-F3D6-475E-850F-162793659988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDF675CB-F3D6-475E-850F-162793659988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDF675CB-F3D6-475E-850F-162793659988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDF675CB-F3D6-475E-850F-162793659988}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F13FA35B-6371-449D-B011-E8753A922C65}
+	EndGlobalSection
+EndGlobal
