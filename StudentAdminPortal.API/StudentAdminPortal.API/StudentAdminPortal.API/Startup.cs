@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using StudentAdminPortal.API.DataModels;
+using StudentAdminPortal.API.Repositories;
 using System.IO;
 //using FluentValidation.AspNetCore;
 
@@ -38,10 +41,10 @@ namespace StudentAdminPortal.API
 
             //services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-            //services.AddDbContext<StudentAdminContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
+            services.AddDbContext<StudentAdminContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
 
-            //services.AddScoped<IStudentRepository, SqlStudentRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             //services.AddScoped<IImageRepository, LocalStorageImageRepository>();
 
             services.AddSwaggerGen(c =>
@@ -49,7 +52,7 @@ namespace StudentAdminPortal.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentAdminPortal.API", Version = "v1" });
             });
 
-            //services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddAutoMapper(typeof(Startup).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
