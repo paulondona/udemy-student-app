@@ -72,5 +72,14 @@ namespace StudentAdminPortal.API.Repositories
 
             return (currentStudent, isValid: true);
         }
+
+        public async Task<(Student student, bool isValid)> AddStudentAsync(Student studentRequest)
+        {
+            var newStudent = await context.Student.AddAsync(studentRequest);
+
+            await context.SaveChangesAsync();
+
+            return (newStudent.Entity, isValid: true);
+        }
     }
 }
