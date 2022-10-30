@@ -81,5 +81,20 @@ namespace StudentAdminPortal.API.Repositories
 
             return (newStudent.Entity, isValid: true);
         }
+
+        public async Task<bool> UpdateProfileImage(Guid studentId, string profileImageUrl)
+        {
+            bool isValid = false;
+            var currentStudent = await GetStudentAsync(studentId);
+
+            if (currentStudent != null)
+            {
+                currentStudent.ProfileImageUrl = profileImageUrl;
+                await context.SaveChangesAsync();
+                isValid = true;
+            }
+
+            return isValid;
+        }
     }
 }

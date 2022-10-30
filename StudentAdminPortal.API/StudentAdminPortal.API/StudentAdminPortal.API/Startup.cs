@@ -44,7 +44,7 @@ namespace StudentAdminPortal.API
                 options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
 
             services.AddScoped<IStudentRepository, StudentRepository>();
-            //services.AddScoped<IImageRepository, LocalStorageImageRepository>();
+            services.AddScoped<IImageRepository, LocalStorageImageRepository>();
 
             services.AddSwaggerGen(c =>
             {
