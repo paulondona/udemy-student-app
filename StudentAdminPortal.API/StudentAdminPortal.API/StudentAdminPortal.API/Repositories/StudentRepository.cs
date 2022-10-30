@@ -33,7 +33,7 @@ namespace StudentAdminPortal.API.Repositories
             return await context.Student.AnyAsync(student => student.Id == studentId);
         }
 
-        public async Task<(Student student, bool isValid)> UpdateStudent(Guid studentId, Student studentRequest)
+        public async Task<(Student student, bool isValid)> UpdateStudentAsync(Guid studentId, Student studentRequest)
         {
             var currentStudent = await GetStudentAsync(studentId);
             bool isValid = false;
@@ -55,6 +55,22 @@ namespace StudentAdminPortal.API.Repositories
             }
 
             return (currentStudent, isValid);
+        }
+
+        public async Task<(Student student, bool isValid)> DeleteStudentAsync(Guid studentId)
+        {
+            var currentStudent = await GetStudentAsync(studentId);
+            bool isValid = false;
+
+            if (currentStudent == null)
+            {
+                return (currentStudent, isValid);
+            }
+
+            context.Student.Remove(currentStudent);
+            await context.SaveChangesAsync();
+
+            return (currentStudent, isValid: true);
         }
     }
 }

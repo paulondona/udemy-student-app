@@ -8,6 +8,7 @@ namespace StudentAdminPortal.API.Repositories
         Task<Student> GetStudentAsync(Guid studentId);
         Task<List<Gender>> GetGendersAsync();
         Task<bool> Exists(Guid studentId);
-        Task<(Student student, bool isValid)> UpdateStudent(Guid studentId, Student studentRequest);
+        Task<(Student student, bool isValid)> UpdateStudentAsync(Guid studentId, Student studentRequest);
+        Task<(Student student, bool isValid)> DeleteStudentAsync(Guid studentId);
     }
 }

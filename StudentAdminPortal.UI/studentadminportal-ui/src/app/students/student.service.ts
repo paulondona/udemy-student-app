@@ -14,11 +14,11 @@ export class StudentService {
   constructor(private httpClient: HttpClient) { }
 
   getAllStudents(): Observable<Student[]>{
-    return this.httpClient.get<Student[]>(this.baseApiUrl + '/students')
+    return this.httpClient.get<Student[]>(this.baseApiUrl + '/students');
   }
 
   getStudent(studentId: string): Observable<Student>{
-    return this.httpClient.get<Student>(this.baseApiUrl + '/students/' + studentId)
+    return this.httpClient.get<Student>(this.baseApiUrl + '/students/' + studentId);
   }
 
   updateStudent(studentId: string, studentRequest: Student) : Observable<Student>{
@@ -33,6 +33,10 @@ export class StudentService {
       postalAddress: studentRequest.address.postalAddress
     }
 
-    return this.httpClient.put<Student>(this.baseApiUrl + '/students/' + studentId, updateStudentRequest)
+    return this.httpClient.put<Student>(this.baseApiUrl + '/students/' + studentId, updateStudentRequest);
+  }
+
+  deleteStudent(studentId:string) : Observable<Student>{
+    return this.httpClient.delete<Student>(this.baseApiUrl + '/students/' + studentId);
   }
 }

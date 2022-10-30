@@ -50,7 +50,7 @@ namespace StudentAdminPortal.API.Controllers
                 return NotFound();
             }
 
-            var updatedStudent = await studentRepository.UpdateStudent(studentId, mapper.Map<DataModels.Student>(student));
+            var updatedStudent = await studentRepository.UpdateStudentAsync(studentId, mapper.Map<DataModels.Student>(student));
 
             if (!updatedStudent.isValid)
             {
@@ -58,6 +58,25 @@ namespace StudentAdminPortal.API.Controllers
             }
               
             return Ok(mapper.Map<Student>(updatedStudent.student));
+        }
+
+        [HttpDelete]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> DeleteStudentAsync([FromRoute] Guid studentId)
+        {
+            if (!await studentRepository.Exists(studentId))
+            {
+                return NotFound();
+            }
+
+            var deleteResult = await studentRepository.DeleteStudentAsync(studentId);
+
+            if (!deleteResult.isValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(mapper.Map<Student>(deleteResult.student));
         }
 
     }
