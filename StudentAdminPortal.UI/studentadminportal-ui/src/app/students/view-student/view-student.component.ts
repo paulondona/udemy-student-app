@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Gender } from 'src/app/models/ui-models/gender.model';
 import { Student } from 'src/app/models/ui-models/student.model';
+import { GenderService } from 'src/app/services/gender.service';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -10,6 +13,7 @@ import { StudentService } from '../student.service';
 })
 export class ViewStudentComponent implements OnInit {
   studentId: string | null | undefined;
+  genderList: Gender[] = [];
   student: Student = {
     id: '',
     firstName: '',
@@ -31,7 +35,9 @@ export class ViewStudentComponent implements OnInit {
   };
 
   constructor(private readonly studentService: StudentService,
-    private readonly route: ActivatedRoute) { }
+    private readonly route: ActivatedRoute,
+    private readonly genderService: GenderService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -48,10 +54,34 @@ export class ViewStudentComponent implements OnInit {
 
             }
           });
+
+          this.genderService.getGenderList().subscribe({
+            next: (genders) => {
+              this.genderList = genders;
+            },
+            error: (e) => {
+
+            }
+          });
         }
       }
     );
 
   }
 
+  onUpdate(): void{
+    // call student service to udpate student
+    this.studentService.updateStudent(this.student.id, this.student).subscribe({
+      next: (stundenResp) => {
+        //Show Notification
+        this.snackBar.open("Student updated successfully.", undefined, {
+          duration: 2000,
+
+        });
+      },
+      error: (e) =>{
+
+      }
+    });
+  }
 }
